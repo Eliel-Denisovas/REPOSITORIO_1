@@ -1,65 +1,79 @@
-/* CSS (css/style.css) */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    transition: background 0.3s, color 0.3s;
-}
-
-header {
-    background: #007bff;
-    color: white;
-    padding: 20px;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-}
-
-footer {
-    background: #f1f1f1;
-    padding: 10px;
-    margin-top: 20px;
-}
-
-/* Menu responsivo */
-.menu-icon {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-#menu-toggle {
-    display: none;
-}
-
-@media (max-width: 600px) {
-    .menu {
-        display: none;
-    }
-    #menu-toggle:checked + .menu {
-        display: block;
-    }
-    .menu-icon {
-        display: block;
-    }
-}
-
-/* Dark Mode */
-.dark-mode {
-    background: #333;
-    color: white;
-}
+   body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+        }
+        .game-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #fff;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+        }
+        .title {
+            font-size: 24px;
+            text-shadow: 0px 0px 10px cyan;
+        }
+        .config-container {
+            margin: 20px 0;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: cyan;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: lime;
+            box-shadow: 0px 0px 10px lime;
+        }
+        .game-board {
+            margin: 20px 0;
+        }
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .card {
+            width: 100px;
+            height: 150px;
+            background-color: gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+        .card:hover {
+            transform: scale(1.1);
+        }
+        .flipped {
+            background-color: white;
+            color: black;
+        }
+        .hidden {
+            display: none;
+        }
+        .historico-container {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+        }
+        th {
+            background-color: cyan;
+            color: black;
+        }
