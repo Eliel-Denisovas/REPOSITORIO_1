@@ -53,18 +53,18 @@ body {
   }
   
   .card {
-    width: 120px;
-    height: 180px;
+    width: 240px;
+    height: 360px;
     background-size: cover;
     background-position: center;
-    border-radius: 10px;
+    border-radius: 20px;
     cursor: pointer;
     transition: transform 0.5s;
     background-image: url('assets/images/fundo.webp');
   }
   
   .card:hover {
-    transform: scale(1.1);
+    transform: scale(1.);
   }
   
   /* Botão de Registros */
