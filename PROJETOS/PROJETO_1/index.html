@@ -1,45 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Responsiva</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who is the King?</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="">
-    <header>
-        <h1>A GAME</h1>
-    </header>
-    <nav>
-        <ul class="menu">   
-            <li><a href="#">Sobre</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section id="display">
-            <section>
-                <div class="container">
-                    <div class="box">
-                        <p>a</p>
-                    </div>
-                    <div class="box">
-                        <p>a</p>
-                    </div>
-                </div>
-            </section>
-            
-        </section id="cardboard">
-        <section>
-            <section>
-                <div class="container">
-                    <div class="box">
-                        <img src="assets/images/fundo.webp" alt="">
-                    </div>
-                    <div class="box">
-                        <img src="assets/images/fundo.webp" alt="">
-                    </div>
-                </div>
-            </section>
-        </section>
-    </main>
-    <script src="js/script.js"></script>
+<body>
+
+  <!-- Pop-up Inicial -->
+  <div id="start-popup" class="modal">
+    <div class="modal-content">
+      <h2>Welcome to "Who is the King?"</h2>
+      <button id="play-button">Play</button>
+    </div>
+  </div>
+
+  <!-- Pop-up de Configuração -->
+  <div id="game-settings" class="modal hidden">
+    <div class="modal-content">
+      <h2>Game Settings</h2>
+      <p>Starting Balance: €1000</p>
+      <label for="bet">Bet Amount (€):</label>
+      <input type="number" id="bet" min="1" step="1" value="10">
+      <label for="rounds">Number of Rounds:</label>
+      <input type="number" id="rounds" min="1" max="21" value="5">
+      <button id="start-game">Start Game</button>
+    </div>
+  </div>
+
+  <!-- Jogo -->
+  <div class="game-container hidden">
+    <h1>Who is the King?</h1>
+    <p>Total Balance: <span id="total-balance">€1000.00</span></p>
+
+    <div class="game-board">
+      <p>Find the King!</p>
+      <div class="cards">
+        <div class="card" id="card-left"></div>
+        <div class="card" id="card-right"></div>
+      </div>
+    </div>
+
+    <!-- Botão de Visualização dos Registros -->
+    <button id="toggle-records">View Records</button>
+
+    <!-- Área dos Registros -->
+    <div id="records-container" class="hidden">
+      <div class="history-container">
+        <h2>Current Game</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Round</th>
+              <th>Result</th>
+              <th>Amount (€)</th>
+              <th>Game Total (€)</th>
+            </tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+      </div>
+
+      <div class="completed-games">
+        <h2>Game Results</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Game</th>
+              <th>Rounds Played</th>
+              <th>Initial Bet (€)</th>
+              <th>Final Result (€)</th>
+            </tr>
+          </thead>
+          <tbody id="games-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop-up de Game Over -->
+  <div id="new-game-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Game Over!</h2>
+      <p>Your final winnings: <span id="final-winnings">€0.00</span></p>
+      <button id="restart-game">Yes, Play Again</button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,79 +1,115 @@
-   body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-        }
-        .game-container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border: 2px solid #fff;
-            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
-        }
-        .title {
-            font-size: 24px;
-            text-shadow: 0px 0px 10px cyan;
-        }
-        .config-container {
-            margin: 20px 0;
-        }
-        input, button {
-            margin: 10px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        button {
-            background-color: cyan;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background-color: lime;
-            box-shadow: 0px 0px 10px lime;
-        }
-        .game-board {
-            margin: 20px 0;
-        }
-        .cards {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .card {
-            width: 100px;
-            height: 150px;
-            background-color: gray;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.5s;
-        }
-        .card:hover {
-            transform: scale(1.1);
-        }
-        .flipped {
-            background-color: white;
-            color: black;
-        }
-        .hidden {
-            display: none;
-        }
-        .historico-container {
-            margin-top: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid white;
-            padding: 10px;
-        }
-        th {
-            background-color: cyan;
-            color: black;
-        }
+/* Reset */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1b3a2c; /* Verde escuro acinzentado levemente amarelado */
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Modais */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .modal-content {
+    background: rgba(34, 34, 34, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px cyan;
+  }
+  
+  /* Botões */
+  button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background: cyan;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background: lime;
+  }
+  
+  /* Cartas */
+  .cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  
+  .card {
+    width: 120px;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.5s;
+    background-image: url('../assets/images/fundo.webp');
+  }
+  
+  .card:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Botão de Registros */
+  #toggle-records {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    padding: 15px;
+    background: #ffbf00;
+    color: black;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  
+  /* Área dos Registros */
+  #records-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+  }
+  
+  /* Estilizando tabelas */
+  .history-container table, .completed-games table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+  }
+  
+  .history-container th, .completed-games th, 
+  .history-container td, .completed-games td {
+    padding: 10px;
+    border: 1px solid white;
+  }
+  
+  .win {
+    color: limegreen;
+    font-weight: bold;
+  }
+  
+  .loss {
+    color: red;
+    font-weight: bold;
+  }
+  
