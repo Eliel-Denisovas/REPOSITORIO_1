@@ -60,7 +60,7 @@ body {
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.5s;
-    background-image: url('../assets/images/fundo.webp');
+    background-image: url('assets/images/fundo.webp');
   }
   
   .card:hover {

@@ -72,8 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
       currentRound++;
   
       // 🃏 Resetar cartas para a imagem de fundo
-      cardLeft.style.backgroundImage = "url('../assets/images/fundo.webp')";
-      cardRight.style.backgroundImage = "url('../assets/images/fundo.webp')";
+      cardLeft.style.backgroundImage = "url('assets/images/fundo.webp')";
+      cardRight.style.backgroundImage = "url('assets/images/fundo.webp')";
   
       // Permitir que o usuário escolha uma carta
       cardLeft.addEventListener("click", chooseCard);
@@ -93,11 +93,11 @@ document.addEventListener("DOMContentLoaded", () => {
   
       // Revelar as cartas
       cardLeft.style.backgroundImage = isKingLeft
-        ? "url('../assets/images/rei.webp')"
-        : "url('../assets/images/rainha.webp')";
+        ? "url('assets/images/rei.webp')"
+        : "url('assets/images/rainha.webp')";
       cardRight.style.backgroundImage = isKingLeft
-        ? "url('../assets/images/rainha.webp')"
-        : "url('../assets/images/rei.webp')";
+        ? "url('assets/images/rainha.webp')"
+        : "url('assets/images/rei.webp')";
   
       // Atualizar valores
       betAmount = won ? betAmount * 2 : betAmount / 2;
