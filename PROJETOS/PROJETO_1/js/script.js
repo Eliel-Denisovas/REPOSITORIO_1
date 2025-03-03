@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   startButton.addEventListener("click", () => {
     betAmount = parseFloat(document.getElementById("bet").value);
     totalRounds = parseInt(document.getElementById("rounds").value);
-    gameResult = 0;
+    gameResult = betAmount;
     initialBet = betAmount;
     roundBet = betAmount / totalRounds; // Aposta dividida pelo número de rodadas
     currentRound = 0;
@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function endGame() {
+    gameResult -= betAmount;
     userBalance += gameResult;
     totalBalanceDisplay.textContent = `€${userBalance.toFixed(2)}`;
 
@@ -130,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <td>${totalRounds}</td>
             <td>€${initialBet.toFixed(2)}</td>
             <td class="${gameResult < 0 ? 'loss' : 'win'}">€${gameResult.toFixed(2)}</td>
+            <td>€${userBalance.toFixed(2)}</td> <!-- Nova Coluna -->
         </tr>
     `);
 
@@ -137,8 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
     finalWinningsDisplay.classList.toggle("loss", gameResult < 0);
 
     newGameModal.style.display = "flex";
-  }
-
+}
   restartButton.addEventListener("click", () => {
     newGameModal.style.display = "none";
     settingsModal.style.display = "flex";

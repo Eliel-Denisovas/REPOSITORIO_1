@@ -71,10 +71,12 @@
               <th>Rounds Played</th>
               <th>Initial Bet (€)</th>
               <th>Final Result (€)</th>
+              <th>Total Balance (€)</th>
+              <th>Details</th> <!-- Nova coluna -->
             </tr>
-          </thead>
+          </thead>          
           <tbody id="games-body"></tbody>
-        </table>
+        </table>        
       </div>
     </div>
   </div>
@@ -89,5 +91,26 @@
   </div>
 
   <script src="js/script.js"></script>
+
+  <!-- Pop-up para mostrar os detalhes de um jogo específico -->
+<div id="game-details-modal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Game Details</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Round</th>
+          <th>Result</th>
+          <th>Amount (€)</th>
+          <th>Game Total (€)</th>
+          <th>Total Balance (€)</th>
+        </tr>
+      </thead>
+      <tbody id="game-details-body"></tbody>
+    </table>
+    <button id="close-game-details">Close</button>
+  </div>
+</div>
+
 </body>
 </html>
