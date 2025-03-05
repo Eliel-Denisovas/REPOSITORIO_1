@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const playButton = document.getElementById("play-button");
   const startButton = document.getElementById("start-game");
   const restartButton = document.getElementById("restart-game");
-  const toggleRecords = document.getElementById("toggle-records");
+  const resetButton = document.getElementById("reset-button");
   const recordsContainer = document.getElementById("records-container");
   const historyBody = document.getElementById("history-body");
   const gamesBody = document.getElementById("games-body");
@@ -15,8 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const newGameModal = document.getElementById("new-game-modal");
   const cardLeft = document.getElementById("card-left");
   const cardRight = document.getElementById("card-right");
-  let initialGameBalance = 0;
+  const exitButton = document.getElementById("exit-game");
 
+  let initialGameBalance = 0;
 
   // 💰 Variáveis do jogo
   function getLastBalance() {
@@ -46,12 +47,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initializeGame();
 
+  resetButton.addEventListener("click", () => {
+    localStorage.clear(); // Apaga todos os dados do LocalStorage
+    userBalance = 1000.00; // Reinicia o saldo inicial
+    totalBalanceDisplay.textContent = `€${userBalance.toFixed(2)}`;
+    historyBody.innerHTML = ""; // Zera o histórico de rodadas
+    gamesBody.innerHTML = ""; // Zera os registros de jogos
+    initializeGame(); // Reinicia o jogo como se fosse a primeira vez
+});
+
   playButton.addEventListener("click", () => {
     startPopup.style.display = "none";
     settingsModal.style.display = "flex";
   });
 
-  toggleRecords.addEventListener("click", () => {
+  resetButton.addEventListener("click", () => {
     recordsContainer.classList.toggle("hidden");
   });
 
@@ -98,6 +108,12 @@ document.addEventListener("DOMContentLoaded", () => {
     roundBet = 0;
 
     historyBody.innerHTML = "";
+  });
+
+  exitButton.addEventListener("click", () => {
+    newGameModal.style.display = "none"; // Esconde o pop-up de Game Over
+    settingsModal.style.display = "none"; // Esconde as configurações
+    startPopup.style.display = "flex"; // Volta para a tela inicial
   });
 
   function nextRound() {

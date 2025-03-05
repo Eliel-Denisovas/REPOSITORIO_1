@@ -68,7 +68,7 @@ body {
   }
   
   /* Botão de Registros */
-  #toggle-records {
+  #reset-button {
     position: fixed;
     bottom: 15px;
     right: 15px;
