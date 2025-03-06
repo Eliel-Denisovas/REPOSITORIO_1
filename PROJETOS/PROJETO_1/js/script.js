@@ -129,15 +129,28 @@ document.addEventListener("DOMContentLoaded", () => {
       endGame();
       return;
     }
-
+  
     currentRound++;
-
-    cardLeft.style.backgroundImage = "url('assets/images/fundo.webp')";
-    cardRight.style.backgroundImage = "url('assets/images/fundo.webp')";
-
-    cardLeft.addEventListener("click", chooseCard);
-    cardRight.addEventListener("click", chooseCard);
-  }
+  
+    // Desativa os cliques temporariamente
+    cardLeft.style.pointerEvents = "none";
+    cardRight.style.pointerEvents = "none";
+  
+    // Atualiza visualmente as cartas primeiro
+    setTimeout(() => {
+      cardLeft.style.backgroundImage = "url('assets/images/fundo.webp')";
+      cardRight.style.backgroundImage = "url('assets/images/fundo.webp')";
+  
+      // Reativa os cliques após um pequeno atraso
+      setTimeout(() => {
+        cardLeft.style.pointerEvents = "auto";
+        cardRight.style.pointerEvents = "auto";
+  
+        cardLeft.addEventListener("click", chooseCard);
+        cardRight.addEventListener("click", chooseCard);
+      }, 300); // Pequeno delay para garantir que o jogador veja a atualização
+    }, 500);
+  }  
 
   function chooseCard(event) {
     cardLeft.removeEventListener("click", chooseCard);
