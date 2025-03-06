@@ -231,64 +231,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Função para exibir os detalhes do jogo
 function showGameDetails(gameIndex) {
-    const savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
-    const gameData = savedGames.find(game => game.gameIndex == gameIndex);
+  if (!gameIndex) {
+    alert("Erro: ID do jogo não encontrado.");
+    return;
+  }
 
-    if (!gameData) {
-        alert("No data available for this game.");
-        return;
-    }
+  const savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
+  const gameData = savedGames.find(game => game.gameIndex == gameIndex);
 
-    const modal = document.createElement("div");
-    modal.classList.add("modal");
-    modal.id = "dynamic-game-details-modal";
-    modal.innerHTML = `
-      <div class="modal-content">
-        <h2>Game ${gameIndex} Details</h2>
-        <p><strong>Initial Bet:</strong> €${gameData.initialBet}</p>
-        <p><strong>Initial Balance:</strong> €${gameData.initialBalance}</p>
-        <div class="scrollable-content" style="max-height: 300px; overflow-y: auto;">
-          <table>
-            <thead>
+  if (!gameData) {
+    alert("Erro: Jogo não encontrado.");
+    return;
+  }
+
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+  modal.id = "dynamic-game-details-modal";
+  modal.innerHTML = `
+    <div class="modal-content">
+      <h2>Game ${gameIndex} Details</h2>
+      <p><strong>Initial Bet:</strong> €${gameData.initialBet}</p>
+      <p><strong>Initial Balance:</strong> €${gameData.initialBalance}</p>
+      <div class="scrollable-content" style="max-height: 300px; overflow-y: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Round</th>
+              <th>Result</th>
+              <th>Amount (€)</th>
+              <th>Game Total (€)</th>
+              <th>King Side</th>
+              <th>Date & Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${gameData.rounds.map(round => `
               <tr>
-                <th>Round</th>
-                <th>Result</th>
-                <th>Amount (€)</th>
-                <th>Game Total (€)</th>
-                <th>King Side</th>
-                <th>Date & Time</th>
+                <td>${round.round}</td>
+                <td class="${round.result === 'Win' ? 'win' : 'loss'}">${round.result}</td>
+                <td>${round.amount} €</td>
+                <td>€${round.gameTotal}</td>
+                <td>${round.kingSide}</td>
+                <td>${round.dateTime}</td>
               </tr>
-            </thead>
-            <tbody>
-              ${gameData.rounds.map(round => `
-                <tr>
-                  <td>${round.round}</td>
-                  <td class="${round.result === 'Win' ? 'win' : 'loss'}">${round.result}</td>
-                  <td>${round.amount} €</td>
-                  <td>€${round.gameTotal}</td>
-                  <td>${round.kingSide}</td>
-                  <td>${round.dateTime}</td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        </div>
-        <button class="close-game-details">Close</button>
+            `).join('')}
+          </tbody>
+        </table>
       </div>
-    `;
+      <button class="close-game-details">Close</button>
+    </div>
+  `;
 
-    document.body.appendChild(modal);
+  document.body.appendChild(modal);
 
-    // Evento para fechar o modal
-    modal.querySelector(".close-game-details").addEventListener("click", () => {
-        modal.remove();
-    });
+  // Evento para fechar o modal
+  modal.querySelector(".close-game-details").addEventListener("click", () => {
+      modal.remove();
+  });
 
-    modal.addEventListener("click", (event) => {
-        if (event.target === modal) {
-            modal.remove();
-        }
-    });
+  modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+          modal.remove();
+      }
+  });
 }
 
 // Delegação de evento para os botões "Details"
