@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardLeft = document.getElementById("card-left");
   const cardRight = document.getElementById("card-right");
   const exitButton = document.getElementById("exit-game");
+  const toggleRecordsButton = document.getElementById("toggle-records");
 
   let initialGameBalance = 0;
 
@@ -61,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     settingsModal.style.display = "flex";
   });
 
-  resetButton.addEventListener("click", () => {
+  toggleRecordsButton.addEventListener("click", () => {
     recordsContainer.classList.toggle("hidden");
   });
 

@@ -113,3 +113,27 @@ body {
     font-weight: bold;
   }
   
+  .button-container {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px; /* Espaço entre os botões */
+  }
+  
+  .button-container button {
+    padding: 15px;
+    background: #ffbf00;
+    color: black;
+    border-radius: 10px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .button-container button:hover {
+    background: #ff9f00;
+  }
+  
