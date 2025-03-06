@@ -62,10 +62,10 @@ body {
     transition: transform 0.5s;
     background-image: url('assets/images/fundo.webp');
   }
-  
   .card:hover {
-    transform: scale(1.);
-  }
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  } 
   
   /* Botão de Registros */
   #reset-button {
