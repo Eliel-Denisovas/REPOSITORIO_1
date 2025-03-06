@@ -23,8 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // 💰 Variáveis do jogo
   function getLastBalance() {
     const lastGameRow = gamesBody.querySelector("tr:first-child td:nth-child(5)");
-    return lastGameRow ? parseFloat(lastGameRow.textContent.replace("€", "")) : 1000.00;
-  }
+    
+    if (!lastGameRow || !lastGameRow.textContent) {
+      return 1000.00; // Retorna o saldo inicial padrão se não houver jogos salvos
+    }
+    
+    return parseFloat(lastGameRow.textContent.replace("€", "")) || 1000.00;
+  }  
   
   // Inicializa com o último saldo registrado
   let userBalance = getLastBalance();
