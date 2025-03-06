@@ -74,7 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
   startButton.addEventListener("click", () => {
     initialGameBalance = userBalance.toFixed(2);
 
-    userBalance = parseFloat(localStorage.getItem("userBalance")) || 1000.00;
+    userBalance = getUserBalance();
+
     totalBalanceDisplay.textContent = `€${userBalance.toFixed(2)}`;
 
     betAmount = parseFloat(document.getElementById("bet").value);
@@ -103,7 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
     newGameModal.style.display = "none";
     settingsModal.style.display = "flex";
 
-    userBalance = parseFloat(localStorage.getItem("userBalance")) || 1000.00;
+    userBalance = getUserBalance();
+
     totalBalanceDisplay.textContent = `€${userBalance.toFixed(2)}`;
 
     betAmount = 10.00;
@@ -297,6 +299,16 @@ gamesBody.addEventListener("click", (event) => {
     }
 });
 
+function getUserBalance() {
+  let storedBalance = parseFloat(localStorage.getItem("userBalance"));
+
+  // Se o valor não for um número ou for menor que 0, retorna 1000.00 como padrão
+  if (isNaN(storedBalance) || storedBalance < 0) {
+    return 1000.00;
+  }
+
+  return storedBalance;
+}
 
 function loadSavedGames() {
   let savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
