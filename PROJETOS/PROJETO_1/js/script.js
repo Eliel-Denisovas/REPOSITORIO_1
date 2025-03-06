@@ -48,11 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeGame();
 
   resetButton.addEventListener("click", () => {
-    localStorage.clear(); // Apaga todos os dados do LocalStorage
-    userBalance = 1000.00; // Reinicia o saldo inicial
+    localStorage.clear(); // Apaga TODOS os dados salvos
+    userBalance = 1000.00;
     totalBalanceDisplay.textContent = `€${userBalance.toFixed(2)}`;
-    historyBody.innerHTML = ""; // Zera o histórico de rodadas
-    gamesBody.innerHTML = ""; // Zera os registros de jogos
+    historyBody.innerHTML = "";
+    gamesBody.innerHTML = "";
     initializeGame(); // Reinicia o jogo como se fosse a primeira vez
 });
 
@@ -178,17 +178,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function endGame() {
     const gameIndex = gamesBody.children.length + 1;
     const lastTotalBalance = userBalance.toFixed(2);
-
-    // ✅ Calcular apenas os ganhos/perdas reais
     const netResult = (gameResult - initialBet).toFixed(2);
 
-    // ✅ Criar entrada de resultados do jogo, incluindo saldo inicial e aposta inicial
     const gameData = {
         gameIndex: gameIndex,
         roundsPlayed: totalRounds,
         initialBet: initialBet.toFixed(2),
-        initialBalance: initialGameBalance, // Novo campo para armazenar saldo antes do jogo
-        result: netResult, // Apenas ganhos/perdas reais
+        initialBalance: initialGameBalance,
+        result: netResult,
         totalBalance: lastTotalBalance,
         rounds: [...document.querySelectorAll("#history-body tr")].map(row => {
             const cells = row.querySelectorAll("td");
@@ -203,110 +200,123 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     };
 
-    // ✅ Salvar os detalhes do jogo no LocalStorage
-    localStorage.setItem(`game_${gameIndex}`, JSON.stringify(gameData));
+    // Recupera a lista de jogos salvos ou cria uma nova
+    let savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
+    savedGames.unshift(gameData); // Adiciona o novo jogo ao início do array
+    localStorage.setItem("savedGames", JSON.stringify(savedGames));
 
-    // ✅ Atualizar saldo no localStorage para persistência
     localStorage.setItem("userBalance", userBalance.toFixed(2));
 
-    // ✅ Atualizar a tabela "Game Results"
-    gamesBody.insertAdjacentHTML("afterbegin", `
-      <tr>
-        <td>Game ${gameIndex}</td>
-        <td>${gameData.roundsPlayed}</td>
-        <td>€${gameData.initialBet}</td>
-        <td class="${gameData.result < 0 ? 'loss' : 'win'}">€${gameData.result}</td>
-        <td>€${gameData.totalBalance}</td>
-        <td><button class="details-button" data-game-index="${gameIndex}">Details</button></td>
-      </tr>
-    `);
+    addGameToTable(gameData);
 
-    // ✅ Atualizar pop-up de ganhos/perdas
-    const winningsMessage = netResult >= 0
-        ? `🎉 Você ganhou €${netResult}!` 
+    finalWinningsDisplay.textContent = netResult >= 0
+        ? `🎉 Você ganhou €${netResult}!`
         : `😞 Você perdeu €${Math.abs(netResult)}`;
 
-    finalWinningsDisplay.textContent = winningsMessage;
     finalWinningsDisplay.classList.toggle("loss", netResult < 0);
     finalWinningsDisplay.classList.toggle("win", netResult >= 0);
-
-    // ✅ Atualizar saldo na interface após fechar pop-up
-    newGameModal.addEventListener("transitionend", function updateBalanceAfterPopup() {
-      document.getElementById("total-balance").textContent = `€${lastTotalBalance}`;
-      newGameModal.removeEventListener("transitionend", updateBalanceAfterPopup);
-    });
 
     totalBalanceDisplay.textContent = `€${userBalance.toFixed(2)}`;
     newGameModal.classList.remove("hidden");
     newGameModal.style.display = "flex";
 }
 
+// Função para exibir os detalhes do jogo
 function showGameDetails(gameIndex) {
-  const gameData = JSON.parse(localStorage.getItem(`game_${gameIndex}`)) || {};
+    const savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
+    const gameData = savedGames.find(game => game.gameIndex == gameIndex);
 
-  if (!gameData.rounds || gameData.rounds.length === 0) {
-      alert("No data available for this game.");
-      return;
-  }
-
-  const modal = document.createElement("div");
-  modal.classList.add("modal");
-  modal.id = "dynamic-game-details-modal";
-  modal.innerHTML = `
-  <div class="modal-content">
-    <h2>Game ${gameIndex} Details</h2>
-    <p><strong>Initial Bet:</strong> €${gameData.initialBet}</p>
-    <p><strong>Initial Balance:</strong> €${gameData.initialBalance}</p>
-    <div class="scrollable-content" style="max-height: 300px; overflow-y: auto;">
-      <table>
-        <thead>
-          <tr>
-            <th>Round</th>
-            <th>Result</th>
-            <th>Amount (€)</th>
-            <th>Game Total (€)</th>
-            <th>King Side</th>
-            <th>Date & Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${gameData.rounds.map(round => `
-            <tr>
-              <td>${round.round}</td>
-              <td class="${round.result === 'Win' ? 'win' : 'loss'}">${round.result}</td>
-              <td>${round.amount} €</td>
-              <td>€${round.gameTotal}</td>
-              <td>${round.kingSide}</td>
-              <td>${round.dateTime}</td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    </div>
-    <button class="close-game-details">Close</button>
-  </div>
-`;
-
-document.body.appendChild(modal);
-
-document.querySelector(".close-game-details").addEventListener("click", () => {
-    modal.remove();
-});
-
-modal.addEventListener("click", (event) => {
-    if (event.target === modal) {
-        modal.remove();
+    if (!gameData) {
+        alert("No data available for this game.");
+        return;
     }
-});
+
+    const modal = document.createElement("div");
+    modal.classList.add("modal");
+    modal.id = "dynamic-game-details-modal";
+    modal.innerHTML = `
+      <div class="modal-content">
+        <h2>Game ${gameIndex} Details</h2>
+        <p><strong>Initial Bet:</strong> €${gameData.initialBet}</p>
+        <p><strong>Initial Balance:</strong> €${gameData.initialBalance}</p>
+        <div class="scrollable-content" style="max-height: 300px; overflow-y: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Round</th>
+                <th>Result</th>
+                <th>Amount (€)</th>
+                <th>Game Total (€)</th>
+                <th>King Side</th>
+                <th>Date & Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${gameData.rounds.map(round => `
+                <tr>
+                  <td>${round.round}</td>
+                  <td class="${round.result === 'Win' ? 'win' : 'loss'}">${round.result}</td>
+                  <td>${round.amount} €</td>
+                  <td>€${round.gameTotal}</td>
+                  <td>${round.kingSide}</td>
+                  <td>${round.dateTime}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+        <button class="close-game-details">Close</button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Evento para fechar o modal
+    modal.querySelector(".close-game-details").addEventListener("click", () => {
+        modal.remove();
+    });
+
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.remove();
+        }
+    });
 }
 
-// ✅ Garantir que os botões "Details" funcionam corretamente
+// Delegação de evento para os botões "Details"
 gamesBody.addEventListener("click", (event) => {
-  if (event.target.classList.contains("details-button")) {
-      const gameIndex = event.target.dataset.gameIndex;
-      showGameDetails(gameIndex);
-  }
+    if (event.target.classList.contains("details-button")) {
+        const gameIndex = event.target.dataset.gameIndex;
+        showGameDetails(gameIndex);
+    }
 });
+
+
+function loadSavedGames() {
+  let savedGames = JSON.parse(localStorage.getItem("savedGames")) || [];
+  gamesBody.innerHTML = ""; // Limpa antes de recarregar para evitar duplicatas
+
+  savedGames.forEach(game => {
+      addGameToTable(game);
+  });
+}
+
+function addGameToTable(gameData) {
+  gamesBody.insertAdjacentHTML("afterbegin", `
+    <tr>
+      <td>Game ${gameData.gameIndex}</td>
+      <td>${gameData.roundsPlayed}</td>
+      <td>€${gameData.initialBet}</td>
+      <td class="${gameData.result < 0 ? 'loss' : 'win'}">€${gameData.result}</td>
+      <td>€${gameData.totalBalance}</td>
+      <td><button class="details-button" data-game-index="${gameData.gameIndex}">Details</button></td>
+    </tr>
+  `);
+}
+
+// Chama a função ao carregar a página
+document.addEventListener("DOMContentLoaded", loadSavedGames);
+
 
 
 });
