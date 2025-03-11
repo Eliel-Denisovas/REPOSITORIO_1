@@ -114,9 +114,6 @@ function chooseCard(choseLeft, isKingLeft) {
     }, 1000);
 }
 
-
-// 🔹 Finaliza o jogo e salva o resultado
-// 🔹 Finaliza o jogo e salva o resultado
 // 🔹 Finaliza o jogo e salva o resultado
 function endGame() {
     const gamesBody = document.getElementById("games-body");
