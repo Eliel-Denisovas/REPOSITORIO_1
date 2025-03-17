@@ -197,20 +197,25 @@ button:hover {
   z-index: 100; /* Certifique-se de que a tabela esteja acima de outros elementos */
   overflow-y: auto; /* Permite rolagem vertical se necessário */
 }
-
-.history-container th, .completed-games th, 
 .history-container td, .completed-games td,
-.scrollable-table th, .scrollable-table td,
-.fixed-bottom th, .fixed-bottom td {
-  padding: 5px 10px;
+.scrollable-table td, .fixed-bottom td {
+  background: rgba(0, 0, 0, 0.3);
   height: auto;
   line-height: 1;
-  border: 1px solid rgb(0, 132, 110);
   text-align: center;
   width: 16.66%; /* Divide uniformemente as colunas */
   box-sizing: border-box; /* Impede que padding afete largura */
   white-space: nowrap; /* Impede quebras de linha inesperadas */
   font-size: 1rem;
+  color: hsla(188, 100%, 50%, 0.568);
+  padding: 0.2em;
+}
+
+.scrollable-table th, .history-container th, .fixed-bottom th, .completed-games th {
+
+  border: 1px solid cyan; /* Borda verde */
+  color: cyan;
+  padding: 5px 10px;
 }
 
 /* Garante que as células dentro de games-body ocupem toda a largura */
@@ -224,6 +229,7 @@ button:hover {
   width: 16.66%; /* Ajuste conforme o número de colunas */
   box-sizing: border-box; /* Impede que padding afete largura */
 }
+
 
 .win {
   color: hsl(90, 100%, 50%);
@@ -278,17 +284,27 @@ button.details-button {
 }
 
 .scrollable-table {
-  max-height: 6em; 
+  max-height: 8em; 
   overflow-y: auto; /* Apenas rolagem vertical */
   overflow-x: hidden; /* Remove a rolagem horizontal */
   position: relative;
-  margin: 5px;
+  margin-top: 5px;
+}
+
+/* Remove a barra de rolagem horizontal e torna a barra de rolagem vertical invisível */
+.scrollable-table::-webkit-scrollbar {
+  width: 0; /* Remove a barra de rolagem vertical no WebKit */
+}
+
+.scrollable-table {
+  -ms-overflow-style: none;  /* Remove a barra de rolagem vertical no IE e Edge */
+  scrollbar-width: none;  /* Remove a barra de rolagem vertical no Firefox */
 }
 
 /* Garante que a tabela ocupe 100% da largura sem rolagem horizontal */
 .scrollable-table table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
   table-layout: fixed; /* Garante que todas as colunas tenham largura fixa */
 }
 
@@ -298,7 +314,7 @@ button.details-button {
   width: 100%;
   position: sticky;
   top: 0;
-  background: rgba(34, 34, 34, 0.95);
+  background: hsla(0, 0%, 0%, 0.3);
   z-index: 100;
 }
 
@@ -307,6 +323,7 @@ button.details-button {
   display: block;
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden; /* Remove a rolagem horizontal */
 }
 
 /* Animação de flip nas cartas */
@@ -354,7 +371,7 @@ button:hover {
 .progress-bar {
   width: 100%;
   height: 10px;
-  background: #222;
+  background: hsla(0, 0%, 0%, 0.3);
   border-radius: 5px;
   overflow: hidden;
   margin: 10px 0;
@@ -368,7 +385,7 @@ button:hover {
 }
 
 #Page-title {
-  border-bottom: rgba(34, 34, 34, 0.95) 1px solid;
+  border-bottom: hsla(0, 0%, 0%, 0.3) 2px solid;
 }
 
 #Page-title h1 {
