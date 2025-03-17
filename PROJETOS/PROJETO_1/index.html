@@ -6,7 +6,6 @@
   <title>Who is the King?</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="assets/images/fundo.webp">
-
 </head>
 <body>
 
@@ -33,7 +32,10 @@
 
   <!-- Jogo -->
   <div class="game-container hidden">
-    <h1>Find the King</h1>
+    <div id="Page-title">
+      <h1>Find the King</h1>
+    </div>
+
     <p>Balance: <span id="total-balance">€1000.00</span></p>
 
     <div class="game-board">
@@ -53,7 +55,7 @@
     <div id="records-container" class="hidden">
       <div class="history-container">
         <h2>Current Game</h2>
-        <table>
+        <table class="table-common">
           <thead>
             <tr>
               <th>Round</th>
@@ -61,10 +63,8 @@
               <th>Amount (€)</th>
               <th>Game Total (€)</th>
               <th>King Side</th>
-              <th>Date & Time</th>
             </tr>
           </thead>
-          
           <tbody id="history-body"></tbody>
         </table>
       </div>
@@ -72,7 +72,7 @@
       <div class="completed-games fixed-bottom">
         <h2>Game Results</h2>
         <div class="scrollable-table">
-          <table>
+          <table class="table-common">
             <thead>
               <tr>
                 <th>Game</th>
@@ -88,35 +88,36 @@
         </div>
       </div>           
 
-  <!-- Pop-up de Game Over -->
-  <div id="new-game-modal" class="modal hidden">
-    <div class="modal-content">
-      <h2>Game Over!</h2>
-      <p>Your final winnings: <span id="final-winnings">€0.00</span></p>
-      <button id="restart-game">Play Again</button>
-      <button id="exit-game">Exit Game</button> <!-- Novo botão -->
-    </div>
-  </div>
-  
-  <!-- Pop-up para mostrar os detalhes de um jogo específico -->
-<div id="game-details-modal" class="modal hidden">
+<!-- Pop-up de Game Over -->
+<div id="new-game-modal" class="modal hidden">
   <div class="modal-content">
-    <h2>Game Details</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Round</th>
-          <th>Result</th>
-          <th>Amount (€)</th>
-          <th>Game Total (€)</th>
-          <th>Total Balance (€)</th>
-        </tr>
-      </thead>
-      <tbody id="game-details-body"></tbody>
-    </table>
-    <button id="close-game-details">Close</button>
+    <h2>Game Over!</h2>
+    <p>Your final winnings: <span id="final-winnings">€0.00</span></p>
+    <button id="restart-game">Play Again</button>
+    <button id="exit-game">Exit Game</button>
   </div>
 </div>
+  
+  <!-- Pop-up para mostrar os detalhes de um jogo específico -->
+  <div id="game-details-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Game Details</h2>
+      <table class="table-common">
+        <thead>
+          <tr>
+            <th>Round</th>
+            <th>Result</th>
+            <th>Amount (€)</th>
+            <th>Game Total (€)</th>
+            <th>Total Balance (€)</th>
+            <th>Date & Time</th>
+          </tr>
+        </thead>
+        <tbody id="game-details-body"></tbody>
+      </table>
+      <button id="close-game-details">Close</button>
+    </div>
+  </div>
 
 </body>
 

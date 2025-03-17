@@ -1,4 +1,11 @@
 /* Reset */
+
+html {
+  border-left: 10vw solid rgba(0, 0, 0, 0.3);
+  border-right: 10vw solid rgba(0, 0, 0, 0.3);
+  height: 100vh;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -81,6 +88,13 @@ button {
   margin: 20px auto 0; /* Adiciona espaço acima e centraliza */
   padding: 10px;
   font-size: 1.2rem; /* Aumenta a fonte para melhor usabilidade */
+}
+
+/* Estilo específico para o modal "new-game-modal" */
+#new-game-modal .modal-content {
+  margin-top: 10%; /* Ajuste este valor conforme necessário */
+  top: 0;
+  transform: translateY(0);
 }
 
 /* Botões */
@@ -170,7 +184,7 @@ button:hover {
 }
 
 .history-container {
-  height: 13em
+  height: 13em;
 }
 
 .fixed-bottom {
@@ -186,7 +200,7 @@ button:hover {
 
 .history-container th, .completed-games th, 
 .history-container td, .completed-games td,
-.scrollable-table th, .scrollable-table td 
+.scrollable-table th, .scrollable-table td,
 .fixed-bottom th, .fixed-bottom td {
   padding: 5px 10px;
   height: auto;
@@ -197,6 +211,18 @@ button:hover {
   box-sizing: border-box; /* Impede que padding afete largura */
   white-space: nowrap; /* Impede quebras de linha inesperadas */
   font-size: 1rem;
+}
+
+/* Garante que as células dentro de games-body ocupem toda a largura */
+#games-body tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* Garante que todas as colunas tenham largura fixa */
+}
+
+#games-body td {
+  width: 16.66%; /* Ajuste conforme o número de colunas */
+  box-sizing: border-box; /* Impede que padding afete largura */
 }
 
 .win {
@@ -250,8 +276,6 @@ button.details-button {
 #total-balance {
   color: hsl(45, 100%, 50%);
 }
-
-
 
 .scrollable-table {
   max-height: 6em; 
@@ -341,6 +365,14 @@ button:hover {
   width: 0%;
   background: lime;
   transition: width 0.5s;
+}
+
+#Page-title {
+  border-bottom: rgba(34, 34, 34, 0.95) 1px solid;
+}
+
+#Page-title h1 {
+  margin: 2px;
 }
 
 /* Tamanhos de fonte responsivos */
