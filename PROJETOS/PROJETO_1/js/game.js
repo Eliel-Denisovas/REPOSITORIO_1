@@ -84,12 +84,13 @@ function chooseCard(choseLeft, isKingLeft) {
         : "url('assets/images/rei.webp')";
 
     // Obtém a data e hora do evento
+    const currentDateTime = new Date().toLocaleString();
     const kingSide = isKingLeft ? "Left" : "Right";
 
     // Adiciona resultado à tabela de histórico
     historyBody.insertAdjacentHTML(
         "afterbegin",
-        `<tr>
+        `<tr data-datetime="${currentDateTime}">
             <td>${currentRound}</td>
             <td class="${won ? "win" : "loss"}">${won ? "🏆 Win" : "❌ Loss"}</td>
             <td>${roundAmount.toFixed(2)} €</td>
@@ -109,7 +110,7 @@ function chooseCard(choseLeft, isKingLeft) {
         } else {
             endGame();
         }
-    }, 1000);
+    }, 1500);
 }
 
 // 🔹 Finaliza o jogo e salva o resultado
@@ -129,7 +130,8 @@ function endGame() {
             result: cells[1]?.textContent.includes("Win") ? "Win" : "Loss",
             amount: cells[2]?.textContent.replace("€", "").trim() || "0.00",
             gameTotal: cells[3]?.textContent.replace("€", "").trim() || "0.00",
-            kingSide: cells[4]?.textContent || "Unknown"
+            kingSide: cells[4]?.textContent || "Unknown",
+            dateTime: row.getAttribute('data-datetime') || "Unknown"
         };
     });
 
@@ -154,7 +156,6 @@ function endGame() {
 
     showModal(newGameModal);
 }
-
 
 // 🔹 Configura os eventos dos botões
 startButton.addEventListener("click", startGame);

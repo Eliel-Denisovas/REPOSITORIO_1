@@ -216,6 +216,7 @@ button:hover {
   border: 1px solid cyan; /* Borda verde */
   color: cyan;
   padding: 5px 10px;
+
 }
 
 /* Garante que as células dentro de games-body ocupem toda a largura */
