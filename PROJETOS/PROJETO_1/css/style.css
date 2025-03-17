@@ -1,24 +1,25 @@
 /* Reset */
 
 html {
-  border-left: 10vw solid rgba(0, 0, 0, 0.3);
-  border-right: 10vw solid rgba(0, 0, 0, 0.3);
+  border-left: 10vw solid hsla(0, 0%, 100%, 0.04);
+  border-right: 10vw solid rgba(0, 0, 0, 0.15);
   height: 100vh;
 }
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #1b3a2c; /* Verde escuro acinzentado levemente amarelado */
-  color: #fff;
+  background-color: hsl(153, 36%, 17%); /* Verde escuro acinzentado levemente amarelado */
+  color: rgb(255, 255, 255);
   text-align: center;
 }
 
 #game-settings h1, h2 {
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
-  color: #fff;
+  color:  hsl(153, 100%, 73%);
   margin: 0;
+
 }
 
 p, label, input {
@@ -35,6 +36,52 @@ button {
 #total-balance, .win, .loss {
   font-family: 'Courier New', monospace;
   font-weight: bold;
+}
+
+.balance-and-board {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2vw;
+  box-sizing: border-box;
+}
+
+.balance-container {
+  flex: 1;
+  text-align: center;
+  background: hsla(0, 0%, 0%, 0.3);
+  margin: 0 1vw;
+  padding: 1vw;
+  border-top: hsla(0, 0%, 0%, 0.25) 0.5vw solid;
+  border-left: hsla(0, 0%, 0%, 0.25) 0.5vw solid;
+  border-bottom: hsla(0, 0%, 100%, 0.12) 0.5vw solid;
+  border-right: hsla(0, 0%, 100%, 0.12) 0.5vw solid;
+  box-sizing: border-box;
+}
+
+.balance-container span {
+  display: block;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.balance-container p {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.game-board {
+  flex: 2;
+  display: flex;
+  justify-content:center;
+  background: hsla(0, 0%, 0%, 0.3);
+  margin: 0 1vw;
+  border-top: hsla(0, 0%, 0%, 0.25) 0.5vw solid;
+  border-left: hsla(0, 0%, 0%, 0.25) 0.5vw solid;
+  border-bottom: hsla(0, 0%, 100%, 0.12) 0.5vw solid;
+  border-right: hsla(0, 0%, 100%, 0.12) 0.5vw solid;
+  box-sizing: border-box;
 }
 
 /* Modais */
@@ -125,14 +172,15 @@ button:hover {
   height: min(60vw, 300px);
   background-size: cover;
   background-position: center;
-  border-radius: 20px;
+  border-radius: 2vw;
   cursor: pointer;
   transition: transform 0.5s;
   background-image: url('assets/images/fundo.webp');
+  box-shadow: 15px 15px 15px hsla(0, 0%, 0%, 0.7);
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
   transition: transform 0.3s ease-in-out;
 }
 
@@ -180,12 +228,18 @@ button:hover {
   max-width: 900px; /* Define um limite para o container */
   margin: 0 auto; /* Centraliza o container corretamente */
   text-align: center;
-  background: rgba(34, 34, 34, 0.95); /* Fundo para a tabela */
+  background: hsla(0, 0%, 0%, 0.3); /* Fundo para a tabela */
+  border-top: hsla(0, 0%, 0%, 0.25) 0.5vw solid;
+  border-left: hsla(0, 0%, 0%, 0.25) 0.5vw solid;
+  border-bottom: hsla(0, 0%, 100%, 0.12) 0.5vw solid;
+  border-right: hsla(0, 0%, 100%, 0.12) 0.5vw solid;
+  box-sizing: border-box;
 }
 
 .history-container {
   height: 13em;
 }
+
 
 .fixed-bottom {
   position: fixed;
@@ -197,8 +251,8 @@ button:hover {
   z-index: 100; /* Certifique-se de que a tabela esteja acima de outros elementos */
   overflow-y: auto; /* Permite rolagem vertical se necessário */
 }
-.history-container td, .completed-games td,
-.scrollable-table td, .fixed-bottom td {
+
+.history-container td, .completed-games td{
   background: rgba(0, 0, 0, 0.3);
   height: auto;
   line-height: 1;
@@ -207,16 +261,19 @@ button:hover {
   box-sizing: border-box; /* Impede que padding afete largura */
   white-space: nowrap; /* Impede quebras de linha inesperadas */
   font-size: 1rem;
-  color: hsla(188, 100%, 50%, 0.568);
   padding: 0.2em;
+  font-weight: lighter;
 }
 
-.scrollable-table th, .history-container th, .fixed-bottom th, .completed-games th {
-
-  border: 1px solid cyan; /* Borda verde */
-  color: cyan;
-  padding: 5px 10px;
-
+.history-container th, .completed-games th {
+  border: 1px solid hsl(153, 100%, 75%);; 
+  color:  hsl(153, 100%, 50%);
+  width: 16.66%; /* Divide uniformemente as colunas */
+  box-sizing: border-box; /* Impede que padding afete largura */
+  white-space: nowrap; /* Impede quebras de linha inesperadas */
+  font-size: 1rem;
+  padding: 0.2em;
+  font-weight: 100;
 }
 
 /* Garante que as células dentro de games-body ocupem toda a largura */
@@ -270,14 +327,18 @@ button:hover {
 }
 
 button.details-button {
-  padding: 5px 10px; /* Ajuste o preenchimento conforme necessário */
+  padding: 0 1px; /* Ajuste o preenchimento conforme necessário */
   font-size: 12px; /* Ajuste o tamanho da fonte conforme necessário */
   width: auto; /* Ajuste a largura conforme necessário */
   height: auto; /* Ajuste a altura conforme necessário */
+  margin: 0;
+  font-weight: 900;
+  background-color: hsl(153, 100%, 73%);
 }
 
 .game-container h1 {
-  color: hsl(90, 100%, 50%);
+  color: hsl(153, 100%, 73%);
+  padding: 5px;
 }
 
 #total-balance {
@@ -350,7 +411,7 @@ button.details-button {
 
 /* Efeito de glow nos botões */
 button {
-  box-shadow: 0 0 10px cyan;
+  box-shadow: 0 0 10px hsl(153, 100%, 73%);
   transition: box-shadow 0.3s ease-in-out;
 }
 
@@ -387,10 +448,13 @@ button:hover {
 
 #Page-title {
   border-bottom: hsla(0, 0%, 0%, 0.3) 2px solid;
+  box-shadow: 0px 10px 10px hsla(0, 0%, 0%, 0.5);;
 }
 
 #Page-title h1 {
   margin: 2px;
+  color: hsl(153, 100%, 73%);
+  text-shadow: 1vw 1vw 1vw hsla(0, 0%, 0%, 1);
 }
 
 /* Tamanhos de fonte responsivos */
