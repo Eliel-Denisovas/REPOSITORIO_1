@@ -1,5 +1,5 @@
 /* Reset */
-body {
+  body {
     font-family: Arial, sans-serif;
     background-color: #1b3a2c; /* Verde escuro acinzentado levemente amarelado */
     color: #fff;
@@ -10,7 +10,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     color: #fff;
-}
+  }
 
 p, label, input {
   font-family: 'Roboto', sans-serif;
@@ -145,6 +145,10 @@ button {
   }
 
   /* Definição geral para as tabelas */
+  .completed-games {
+    overflow-x: hidden;
+    width: 100%;
+  }
 
   .history-container, .completed-games {
     display: flex;
@@ -224,6 +228,48 @@ button {
     white-space: nowrap; /* Evita quebras de texto desnecessárias */
   }
 
+  .scrollable-table {
+    max-height: calc(2.5em * 3 + 40px); /* Altura para 2,5 linhas + cabeçalho */
+    overflow-y: auto; /* Apenas rolagem vertical */
+    overflow-x: hidden; /* Remove a rolagem horizontal */
+    border: 1px solid rgba(0, 132, 110, 0.5);
+    position: relative;
+  }
+  
+  /* Garante que a tabela ocupe 100% da largura sem rolagem horizontal */
+  .scrollable-table table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Garante que todas as colunas tenham largura fixa */
+  }
+  
+  /* Mantém o cabeçalho fixo e alinhado corretamente */
+  .scrollable-table thead {
+    display: table; /* Mantém a estrutura da tabela */
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background: rgba(34, 34, 34, 0.95);
+    z-index: 10;
+  }
+  
+  /* Garante que o tbody role separadamente e alinhe corretamente com thead */
+  .scrollable-table tbody {
+    display: block;
+    width: 100%;
+    overflow-y: auto;
+  }
+  
+  /* Garante que as colunas do thead e tbody tenham o mesmo tamanho */
+  .scrollable-table th, .scrollable-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid cyan;
+    width: 16.66%; /* Divide uniformemente as colunas */
+    box-sizing: border-box; /* Impede que padding afete largura */
+    white-space: nowrap; /* Impede quebras de linha inesperadas */
+  }  
+  
   /* Animação de flip nas cartas */
 .card {
   transform-style: preserve-3d;
@@ -255,6 +301,7 @@ button:hover {
 #start-game {
   animation: pulse 1.5s infinite alternate;
 }
+
 @keyframes pulse {
   0% { transform: scale(1); }
   100% { transform: scale(1.1); }
@@ -269,6 +316,7 @@ button:hover {
   overflow: hidden;
   margin: 10px 0;
 }
+
 .progress-bar .progress {
   height: 100%;
   width: 0%;

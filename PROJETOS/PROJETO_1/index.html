@@ -34,7 +34,7 @@
   <!-- Jogo -->
   <div class="game-container hidden">
     <h1>Find the King</h1>
-    <p>Total Balance: <span id="total-balance">€1000.00</span></p>
+    <p>Account balance: <span id="total-balance">€1000.00</span></p>
 
     <div class="game-board">
       <div class="cards">
@@ -48,8 +48,6 @@
       <button id="reset-button">Reset</button>
       <button id="toggle-records">Show Records</button>
     </div>
-    
-
 
     <!-- Área dos Registros -->
     <div id="records-container" class="hidden">
@@ -73,22 +71,22 @@
 
       <div class="completed-games">
         <h2>Game Results</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Game</th>
-              <th>Rounds Played</th>
-              <th>Initial Bet (€)</th>
-              <th>Final Result (€)</th>
-              <th>Final Balance (€)</th>
-              <th>Details</th> <!-- Nova coluna -->
-            </tr>
-          </thead>          
-          <tbody id="games-body"></tbody>
-        </table>        
-      </div>
-    </div>
-  </div>
+        <div class="scrollable-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Game</th>
+                <th>Rounds Played</th>
+                <th>Initial Bet (€)</th>
+                <th>Earnings (€)</th>
+                <th>Account Balance (€)</th>
+                <th>Details</th>
+              </tr>
+            </thead>          
+            <tbody id="games-body"></tbody>
+          </table>
+        </div>
+      </div>           
 
   <!-- Pop-up de Game Over -->
   <div id="new-game-modal" class="modal hidden">
