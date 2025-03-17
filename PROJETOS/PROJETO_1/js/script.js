@@ -6,21 +6,6 @@ import "./game.js"; // Importa a lógica do jogo para garantir funcionamento
 
 const playButton = document.getElementById("play-button");
 
-//inicio de um teste
-console.log("Verificando botão 'Play'...");
-
-if (playButton) {
-  console.log("Botão 'Play' encontrado!");
-  playButton.addEventListener("click", () => {
-    console.log("Botão 'Play' clicado!");
-    document.getElementById("start-popup").style.display = "none";
-    document.getElementById("game-settings").style.display = "flex";
-  });
-} else {
-  console.error("Botão 'Play' NÃO encontrado no DOM!");
-}
-// fim do teste
-
 const resetButton = document.getElementById("reset-button");
 const toggleRecordsButton = document.getElementById("toggle-records");
 const startButton = document.getElementById("start-game");
