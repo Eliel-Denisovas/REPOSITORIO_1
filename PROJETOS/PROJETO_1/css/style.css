@@ -174,14 +174,75 @@ button:hover {
   background-position: center;
   border-radius: 2vw;
   cursor: pointer;
-  transition: transform 0.5s;
+  transition: transform 0.6s, background-color 0.6s;
   background-image: url('assets/images/fundo.webp');
   box-shadow: 15px 15px 15px hsla(0, 0%, 0%, 0.7);
+  position: relative;
 }
 
 .card:hover {
   transform: scale(1.1);
   transition: transform 0.3s ease-in-out;
+}
+
+/* Animação de flip nas cartas */
+.card {
+  transform-style: preserve-3d;
+  transition: transform 0.6s, background-color 0.6s;
+  position: relative;
+}
+
+.card.flipped {
+  transform: rotateY(180deg) scale(1.2);
+}
+
+.card .front, .card .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: opacity 0.6s;
+}
+
+.card .back {
+  transform: rotateY(180deg);
+}
+
+.card.flipped .front {
+  opacity: 0;
+}
+
+.card.flipped .back {
+  opacity: 1;
+}
+
+/* Estilos para as cores de feedback */
+.correct {
+  background-color: lightgreen;
+}
+
+.incorrect {
+  background-color: lightcoral;
+}
+
+.transition-blue {
+  background-color: lightblue;
+}
+
+/* Estilo para desativar cliques */
+.no-click {
+  pointer-events: none;
+}
+
+/* Estilo para escurecer a área das cartas */
+.darkened {
+  background-color: black;
+  transition: background-color 0.6s;
+}
+
+/* Estilo para desativar cliques */
+.no-click {
+  pointer-events: none;
 }
 
 /* Botão de Registros */
@@ -386,27 +447,6 @@ button.details-button {
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden; /* Remove a rolagem horizontal */
-}
-
-/* Animação de flip nas cartas */
-.card {
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
-}
-
-.card.flipped {
-  transform: rotateY(180deg);
-}
-
-.card .front, .card .back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-.card .back {
-  transform: rotateY(180deg);
 }
 
 /* Efeito de glow nos botões */
